@@ -6,7 +6,7 @@ Zotero Pronounce 是一个 Zotero PDF 阅读器选词发音插件。安装后，
 
 当前版本：`0.1.7`
 
-已测试：macOS + Zotero `9.0.4`
+主要测试环境：macOS + Zotero `9.0.4`
 
 兼容范围：Zotero `9.0.3` 到 Zotero `10.x`
 
@@ -54,14 +54,14 @@ http://127.0.0.1:8880/v1/audio/speech
 
 这里使用 Kokoro-FastAPI 作为本地 TTS 服务。它提供的是文本转语音能力，不是聊天大模型。
 
-本说明不使用 Docker，适合 macOS 原生安装。
+本说明不使用 Docker，支持 macOS 和 Windows 原生安装。
 
-### 准备工具
+### macOS 准备工具
 
-先安装 Homebrew，然后安装 Node.js、Git 和 uv：
+先安装 Homebrew，然后安装 Node.js、Git、uv 和 eSpeak NG：
 
 ```bash
-brew install node git uv
+brew install node git uv espeak-ng
 ```
 
 检查是否安装成功：
@@ -71,6 +71,44 @@ node --version
 npm --version
 git --version
 uv --version
+```
+
+### Windows 准备工具
+
+建议使用 Windows Terminal 或 PowerShell。
+
+先安装 Node.js、Git、uv 和 eSpeak NG：
+
+```powershell
+winget install -e --id OpenJS.NodeJS.LTS
+winget install -e --id Git.Git
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+winget install -e --id eSpeak-NG.eSpeak-NG
+```
+
+如果 `winget` 找不到 eSpeak NG，可以到官方 Releases 下载 Windows MSI 安装包：
+
+https://github.com/espeak-ng/espeak-ng/releases
+
+安装完成后，关闭当前 PowerShell，重新打开一个新的 PowerShell，再检查命令是否可用：
+
+```powershell
+node --version
+npm --version
+git --version
+uv --version
+```
+
+eSpeak NG 默认会安装到：
+
+```text
+C:\Program Files\eSpeak NG\libespeak-ng.dll
+```
+
+如果安装到了别的位置，启动服务前手动指定：
+
+```powershell
+$env:PHONEMIZER_ESPEAK_LIBRARY="你的路径\libespeak-ng.dll"
 ```
 
 ### 下载本仓库
@@ -84,49 +122,56 @@ cd Zotero-voice
 
 ### 下载 Kokoro-FastAPI
 
-在 `Zotero-voice` 目录里执行：
+macOS：
 
 ```bash
 mkdir -p .tts
 git clone https://github.com/remsky/Kokoro-FastAPI.git .tts/Kokoro-FastAPI
 ```
 
+Windows PowerShell：
+
+```powershell
+mkdir .tts
+git clone https://github.com/remsky/Kokoro-FastAPI.git .tts\Kokoro-FastAPI
+```
+
 如果已经下载过，可以更新：
+
+macOS：
 
 ```bash
 git -C .tts/Kokoro-FastAPI pull --ff-only
 ```
 
+Windows PowerShell：
+
+```powershell
+git -C .tts\Kokoro-FastAPI pull --ff-only
+```
+
 ### 安装 Python 环境和依赖
 
-进入 Kokoro-FastAPI 目录：
+macOS：
 
 ```bash
 cd .tts/Kokoro-FastAPI
-```
-
-创建 Python 3.10 虚拟环境：
-
-```bash
+uv python install 3.10
 uv venv --python 3.10
-```
-
-安装依赖：
-
-```bash
 uv pip install -e ".[cpu]"
-```
-
-下载 Kokoro 模型文件：
-
-```bash
 uv run --no-sync python docker/scripts/download_model.py --output api/src/models/v1_0
+cd ../..
 ```
 
-回到本仓库根目录：
+Windows PowerShell：
 
-```bash
-cd ../..
+```powershell
+cd .tts\Kokoro-FastAPI
+uv python install 3.10
+uv venv --python 3.10
+uv pip install -e ".[cpu]"
+uv run --no-sync python docker/scripts/download_model.py --output api/src/models/v1_0
+cd ..\..
 ```
 
 ## 启动和停止语音服务
@@ -155,16 +200,66 @@ http://127.0.0.1:8880
 npm run tts:stop
 ```
 
-Apple Silicon Mac 默认使用 `mps`。如果想强制使用 CPU：
+默认设备：
+
+- macOS 默认使用 `mps`，适合 Apple Silicon。
+- Windows 默认使用 `cpu`，最稳。
+- Linux 默认使用 `cpu`。
+
+macOS 如果想强制使用 CPU：
 
 ```bash
 KOKORO_DEVICE=cpu npm run tts:start
 ```
 
+Windows 如果想使用 NVIDIA CUDA，需要先在 Kokoro-FastAPI 里安装 GPU 依赖：
+
+```powershell
+cd .tts\Kokoro-FastAPI
+uv pip install -e ".[gpu]"
+cd ..\..
+$env:KOKORO_DEVICE="cuda"
+npm run tts:start
+```
+
 如果 `uv` 不在 PATH 里，可以手动指定：
+
+macOS：
 
 ```bash
 UV_BIN=/opt/homebrew/bin/uv npm run tts:start
+```
+
+Windows PowerShell：
+
+```powershell
+$env:UV_BIN="C:\Users\你的用户名\.local\bin\uv.exe"
+npm run tts:start
+```
+
+### 备用启动方式
+
+如果 `npm run tts:start` 启动失败，可以直接使用 Kokoro-FastAPI 自带脚本。
+
+macOS：
+
+```bash
+cd .tts/Kokoro-FastAPI
+./start-gpu_mac.sh
+```
+
+Windows CPU：
+
+```powershell
+cd .tts\Kokoro-FastAPI
+.\start-cpu.ps1
+```
+
+Windows NVIDIA GPU：
+
+```powershell
+cd .tts\Kokoro-FastAPI
+.\start-gpu.ps1
 ```
 
 ## 测试语音服务
