@@ -26,6 +26,14 @@ http://127.0.0.1:8880/v1/audio/speech
 
 ## 一、安装 Zotero 插件
 
+可以从 GitHub Releases 下载已经打包好的 XPI：
+
+```text
+https://github.com/techyangj/Zotero-voice/releases
+```
+
+也可以自己从源码构建。
+
 先克隆仓库并安装依赖：
 
 ```bash

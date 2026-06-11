@@ -1,7 +1,12 @@
 {
   "addons": {
     "zoteropronounce@codex.dev": {
-      "updates": []
+      "updates": [
+        {
+          "version": "0.1.7",
+          "update_link": "https://github.com/techyangj/Zotero-voice/releases/download/v0.1.7/zotero-pronounce-0.1.7.xpi"
+        }
+      ]
     }
   }
 }
