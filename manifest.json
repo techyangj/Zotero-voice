@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "Zotero Pronounce",
+  "version": "0.1.7",
+  "description": "Pronounce selected text in the Zotero PDF reader with a local OpenAI-compatible TTS endpoint.",
+  "author": "Zotero Pronounce contributors",
+  "homepage_url": "https://github.com/techyangj/Zotero-voice",
+  "icons": {
+    "48": "chrome/content/icons/favicon.svg",
+    "96": "chrome/content/icons/favicon.svg"
+  },
+  "applications": {
+    "zotero": {
+      "id": "zoteropronounce@codex.dev",
+      "update_url": "https://raw.githubusercontent.com/techyangj/Zotero-voice/main/updates.json",
+      "strict_min_version": "9.0.3",
+      "strict_max_version": "10.*.*"
+    }
+  }
+}

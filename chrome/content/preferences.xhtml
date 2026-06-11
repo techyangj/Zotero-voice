@@ -1,0 +1,85 @@
+<vbox id="zotero-pronounce-preferences"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+      xmlns:html="http://www.w3.org/1999/xhtml">
+  <linkset>
+    <html:link rel="localization" href="zotero-pronounce.ftl"/>
+  </linkset>
+
+  <groupbox>
+    <label>
+      <html:h2 data-l10n-id="zotero-pronounce-prefs-tts-heading"/>
+    </label>
+
+    <html:div class="zotero-pronounce-pref-grid">
+      <html:label class="zotero-pronounce-pref-field">
+        <html:span data-l10n-id="zotero-pronounce-prefs-endpoint"/>
+        <html:input type="url"
+                    preference="extensions.zotero-pronounce.endpoint"
+                    class="zotero-pronounce-pref-input"/>
+      </html:label>
+
+      <html:label class="zotero-pronounce-pref-field">
+        <html:span data-l10n-id="zotero-pronounce-prefs-model"/>
+        <html:input type="text"
+                    preference="extensions.zotero-pronounce.model"
+                    class="zotero-pronounce-pref-input"/>
+      </html:label>
+
+      <html:label class="zotero-pronounce-pref-field">
+        <html:span data-l10n-id="zotero-pronounce-prefs-voice"/>
+        <html:input type="text"
+                    preference="extensions.zotero-pronounce.voice"
+                    class="zotero-pronounce-pref-input"/>
+      </html:label>
+
+      <html:label class="zotero-pronounce-pref-field">
+        <html:span data-l10n-id="zotero-pronounce-prefs-response-format"/>
+        <html:select preference="extensions.zotero-pronounce.response_format"
+                     class="zotero-pronounce-pref-input">
+          <html:option value="mp3">mp3</html:option>
+          <html:option value="wav">wav</html:option>
+          <html:option value="ogg">ogg</html:option>
+          <html:option value="flac">flac</html:option>
+        </html:select>
+      </html:label>
+
+      <html:label class="zotero-pronounce-pref-field">
+        <html:span data-l10n-id="zotero-pronounce-prefs-speed"/>
+        <html:input type="number"
+                    min="0.25"
+                    max="4"
+                    step="0.05"
+                    preference="extensions.zotero-pronounce.speed"
+                    class="zotero-pronounce-pref-input"/>
+      </html:label>
+
+      <html:label class="zotero-pronounce-pref-field">
+        <html:span data-l10n-id="zotero-pronounce-prefs-max-text-length"/>
+        <html:input type="number"
+                    min="1"
+                    max="5000"
+                    step="1"
+                    preference="extensions.zotero-pronounce.max_text_length"
+                    class="zotero-pronounce-pref-input"/>
+      </html:label>
+    </html:div>
+  </groupbox>
+
+  <groupbox>
+    <label>
+      <html:h2 data-l10n-id="zotero-pronounce-prefs-behavior-heading"/>
+    </label>
+
+    <html:label class="zotero-pronounce-pref-checkbox">
+      <html:input type="checkbox"
+                  preference="extensions.zotero-pronounce.autoplay"/>
+      <html:span data-l10n-id="zotero-pronounce-prefs-autoplay"/>
+    </html:label>
+
+    <html:label class="zotero-pronounce-pref-checkbox">
+      <html:input type="checkbox"
+                  preference="extensions.zotero-pronounce.debug"/>
+      <html:span data-l10n-id="zotero-pronounce-prefs-debug"/>
+    </html:label>
+  </groupbox>
+</vbox>

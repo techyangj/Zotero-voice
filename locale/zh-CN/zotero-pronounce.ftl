@@ -1,0 +1,10 @@
+zotero-pronounce-prefs-tts-heading = 文本转语音
+zotero-pronounce-prefs-endpoint = Endpoint
+zotero-pronounce-prefs-model = 模型
+zotero-pronounce-prefs-voice = 声音
+zotero-pronounce-prefs-response-format = 返回格式
+zotero-pronounce-prefs-speed = 语速
+zotero-pronounce-prefs-max-text-length = 选中文本最大长度
+zotero-pronounce-prefs-behavior-heading = 行为
+zotero-pronounce-prefs-autoplay = 选中文本浮窗出现时自动发音
+zotero-pronounce-prefs-debug = 记录 Reader 选中文本参数用于调试

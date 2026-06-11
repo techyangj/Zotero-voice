@@ -1,0 +1,10 @@
+zotero-pronounce-prefs-tts-heading = Text-to-speech
+zotero-pronounce-prefs-endpoint = Endpoint
+zotero-pronounce-prefs-model = Model
+zotero-pronounce-prefs-voice = Voice
+zotero-pronounce-prefs-response-format = Response format
+zotero-pronounce-prefs-speed = Speed
+zotero-pronounce-prefs-max-text-length = Maximum selected text length
+zotero-pronounce-prefs-behavior-heading = Behavior
+zotero-pronounce-prefs-autoplay = Automatically pronounce when the selection popup opens
+zotero-pronounce-prefs-debug = Log Reader selection parameters for debugging

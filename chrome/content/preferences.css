@@ -1,0 +1,27 @@
+#zotero-pronounce-preferences {
+  max-width: 720px;
+}
+
+.zotero-pronounce-pref-grid {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr);
+  gap: 12px;
+  margin: 8px 0 4px;
+}
+
+.zotero-pronounce-pref-field {
+  display: grid;
+  gap: 4px;
+}
+
+.zotero-pronounce-pref-input {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.zotero-pronounce-pref-checkbox {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  margin-block: 8px;
+}

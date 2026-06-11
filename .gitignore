@@ -1,0 +1,10 @@
+node_modules/
+.tts/
+build/
+dist/
+*.xpi
+*.mp3
+*.log
+*.pid
+.DS_Store
+zotero_pronounce_plugin_conversation.md
